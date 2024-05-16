@@ -1,11 +1,15 @@
-import gleam/dynamic.{type Dynamic} as dyn
+import gleam/dynamic as dyn
 import gleam/option.{type Option}
 import gleam/result
 
-import json_canvas_example/generic_node.{
-  type Color, type NodeId, FileNodeType, GroupNodeType, LinkNodeType,
-  TextNodeType, decode_node_attrs,
+import json_canvas_example/internal/generic_node.{decode_node_attrs}
+import json_canvas_example/internal/node_type.{
+  FileNodeType, GroupNodeType, LinkNodeType, TextNodeType,
 }
+import json_canvas_example/node/group_background_style.{
+  type GroupBackgroundStyle, decode_group_background_style,
+}
+import json_canvas_example/types.{type Color, type NodeId}
 
 pub type FilePath {
   FilePath(String)
@@ -25,24 +29,6 @@ pub type GroupLabel {
 
 pub type GroupBackground {
   GroupBackground(String)
-}
-
-pub type GroupBackgroundStyle {
-  Cover
-  Ratio
-  Repeat
-}
-
-fn decode_group_background_style(
-  dyn: Dynamic,
-) -> Result(GroupBackgroundStyle, List(dyn.DecodeError)) {
-  use style <- result.try(dyn.string(dyn))
-  case style {
-    "cover" -> Ok(Cover)
-    "ratio" -> Ok(Ratio)
-    "repeat" -> Ok(Repeat)
-    _ -> Error([dyn.DecodeError("cover, ratio or repeat", style, [])])
-  }
 }
 
 pub type Node {
@@ -87,7 +73,7 @@ pub type Node {
   )
 }
 
-pub fn decode_node(dyn: Dynamic) -> Result(Node, List(dyn.DecodeError)) {
+pub fn decode_node(dyn: dyn.Dynamic) -> Result(Node, List(dyn.DecodeError)) {
   use attrs <- result.try(decode_node_attrs(dyn))
 
   case attrs.ty {
