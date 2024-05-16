@@ -3,7 +3,7 @@ import gleam/json
 import gleeunit
 import gleeunit/should
 
-import json_canvas_example/canvas.{Canvas, decode_canvas}
+import json_canvas.{Canvas, decode_canvas}
 
 pub fn main() {
   gleeunit.main()
