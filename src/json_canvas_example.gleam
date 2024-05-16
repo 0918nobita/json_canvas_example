@@ -8,7 +8,7 @@ import gleam/set
 import simplifile
 
 import json_canvas_example/canvas.{decode_canvas}
-import json_canvas_example/generic_node.{NodeId}
+import json_canvas_example/types.{NodeId}
 
 pub fn main() {
   let assert Ok(input) = simplifile.read(from: "example.canvas")
