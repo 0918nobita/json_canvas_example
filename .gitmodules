@@ -1,0 +1,3 @@
+[submodule "json_canvas"]
+	path = json_canvas
+	url = https://github.com/0918nobita/json_canvas

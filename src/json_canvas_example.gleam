@@ -41,5 +41,6 @@ pub fn main() {
     |> dict.filter(keeping: fn(_key, val) { set.size(val) <= 1 })
     |> dict.size
 
+  io.println("Nodes count: " <> int.to_string(list.length(canvas.nodes)))
   io.println("Leaves count: " <> int.to_string(leaves_count))
 }
