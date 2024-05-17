@@ -3,7 +3,7 @@ import gleam/json
 import gleeunit
 import gleeunit/should
 
-import json_canvas.{Canvas, decode_canvas}
+import json_canvas.{Canvas}
 
 pub fn main() {
   gleeunit.main()
@@ -11,7 +11,7 @@ pub fn main() {
 
 pub fn canvas_missing_fields_test() {
   "{}"
-  |> json.decode(decode_canvas)
+  |> json_canvas.decode
   |> should.equal(
     Error(
       json.UnexpectedFormat([
@@ -24,7 +24,7 @@ pub fn canvas_missing_fields_test() {
 
 pub fn canvas_test() {
   "{ \"nodes\": [], \"edges\": [] }"
-  |> json.decode(decode_canvas)
+  |> json_canvas.decode
   |> should.equal(Ok(Canvas(nodes: [], edges: [])))
 }
 
@@ -37,7 +37,7 @@ pub fn canvas_invalid_node_test() {
     ],
     \"edges\": []
   }"
-  |> json.decode(decode_canvas)
+  |> json_canvas.decode
   |> should.equal(
     Error(
       json.UnexpectedFormat([
@@ -65,7 +65,7 @@ pub fn canvas_invalid_node_type_test() {
     ],
     \"edges\": []
   }"
-  |> json.decode(decode_canvas)
+  |> json_canvas.decode
   |> should.equal(
     Error(
       json.UnexpectedFormat([

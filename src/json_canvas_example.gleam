@@ -1,21 +1,18 @@
 import gleam/dict
 import gleam/int
 import gleam/io
-import gleam/json
 import gleam/list
 import gleam/option.{None, Some}
 import gleam/set
 import simplifile
 
-import json_canvas.{decode_canvas}
+import json_canvas
 import json_canvas/types.{NodeId}
 
 pub fn main() {
   let assert Ok(input) = simplifile.read(from: "example.canvas")
 
-  let assert Ok(canvas) =
-    input
-    |> json.decode(decode_canvas)
+  let assert Ok(canvas) = json_canvas.decode(input)
 
   let leaves_count =
     canvas.edges
