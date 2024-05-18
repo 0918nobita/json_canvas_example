@@ -10,9 +10,9 @@ import json_canvas
 import json_canvas/types.{NodeId}
 
 pub fn main() {
-  let assert Ok(input) = simplifile.read(from: "example.canvas")
+  let assert Ok(content) = simplifile.read(from: "example.canvas")
 
-  let assert Ok(canvas) = json_canvas.decode(input)
+  let assert Ok(canvas) = json_canvas.decode(content)
 
   let leaves_count =
     canvas.edges
