@@ -40,4 +40,8 @@ pub fn main() {
 
   io.println("Nodes count: " <> int.to_string(list.length(canvas.nodes)))
   io.println("Leaves count: " <> int.to_string(leaves_count))
+
+  canvas
+  |> json_canvas.to_string
+  |> simplifile.write(to: "out.canvas")
 }
